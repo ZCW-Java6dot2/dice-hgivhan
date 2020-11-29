@@ -1,10 +1,10 @@
 import java.sql.SQLOutput;
 
 public class Simulation {
-    int numberOfDiesToThrow;
-    int numberOfTossesToRun;
-    Dice dice;
-    Bins bins;
+    private Integer numberOfDiesToThrow;
+    private Integer numberOfTossesToRun;
+    private Dice dice;
+    private Bins bins;
 
     public Simulation(int numberOfDiesToThrow, int numberOfTossesToRun) {
         this.numberOfDiesToThrow = numberOfDiesToThrow;
@@ -15,9 +15,18 @@ public class Simulation {
     }
 
         public void runSimulation () {
+        Integer result;
             for (int i = 1; i < numberOfTossesToRun; i++) {
-                bins.incrementBinCount(dice.tossAndSum());
+                result = dice.tossAndSum();
+                bins.incrementBinCount(result);
             }
+        }
+
+        public float calcPercent(int binNumber){
+        float rolledVal = bins.getBin(binNumber+2);
+        float total = rolledVal/numberOfTossesToRun;
+        return total;
+
         }
 
         public String stars(double percentage){
@@ -30,15 +39,10 @@ public class Simulation {
         }
 
         public void printResults () {
-            int p;
-            double numTimesPercentage;
+            System.out.printf("***\n"+"Simulation of '%d' dice tossed for '%d' times\n"+"***\n\n", numberOfDiesToThrow, numberOfTossesToRun);
             for (int i = numberOfDiesToThrow; i < numberOfDiesToThrow*6; i++) {
-                p = bins.getBin(i);
-                numTimesPercentage = ((double)p/numberOfTossesToRun);
+                System.out.printf("%2d :% 9d: % 4.2f %s\n",i,bins.getBin(i-2),calcPercent(i),stars(i));
 
-                String string = String.format("%3d : %8d: %-2.2f %-5s", i, p, numTimesPercentage, stars(numTimesPercentage));
-
-                System.out.println(string);
 
             }
         }

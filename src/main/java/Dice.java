@@ -1,6 +1,6 @@
 public class Dice {
     private int numOfDice;
-    private int tossedSum;
+    private int tossedSum = 0;
 
     public Dice(int numOfDice){
         this.numOfDice = numOfDice;
@@ -8,7 +8,7 @@ public class Dice {
 
     public Integer tossAndSum(){
             for (int i=0; i <= numOfDice; i++){
-                tossedSum += (int) Math.random()*6 +1;
+                tossedSum += 1+(int) Math.random()*6;
             }
             return tossedSum;
         }

@@ -1,28 +1,55 @@
+import javax.management.ObjectInstance;
 import java.util.Arrays;
 
 public class Bins {
-        private int[] binArray;
+    int minRoll;
+    int maxRoll;
+    private int[] binArray;
+    //bins  roll results(2 die)
+//    0         2
+//    1         3
+//    2         4
+//    3         5
+//    4         6
+//    5         7
+//    6         8
+//    7         9
+//    8         10
+//    9         11
+//    10        12
 
-        public Bins(int min, int max) {
-            binArray = new int[max+1];
-            for (int i = min; i <= max; i++) {
-                binArray[i] = 0;
-            }
-        }
 
-        public void incrementBinCount(int rollResult) {
-            binArray[rollResult] += 1;
-        }
-
-        public Integer getBin(int binNumber) {
-            return binArray[binNumber];
-        }
-
-        public int[] displayBin() {
-            System.out.println(Arrays.toString(binArray));
-            return binArray;
+    public Bins(int min, int max) {
+        this.minRoll = min;
+        this.maxRoll = max;
+        binArray = new int[max + 1];
+        for (int i = min; i <= max; i++) {
+            binArray[i] = 0;
         }
     }
+
+    public void incrementBinCount(int rollResult) {
+        binArray[rollResult+2]++;
+        //-2 to match actual number based on index
+    }
+
+    public Integer getBin(int binNumber) {
+        return binArray[binNumber];
+    }
+
+    public Integer getMin() {
+        return minRoll;
+    }
+
+    public Integer getMax() {
+        return maxRoll;
+    }
+}
+
+//        public int[] displayBin() {
+//            System.out.println(Arrays.toString(binArray));
+//            return binArray;
+
 
 
 
